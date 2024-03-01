@@ -13,14 +13,21 @@ function PokemonList() {
       .then((data) => {
         console.log(data);
         setTotalCount(data.count);
-        setPokemon((prevPokemon) => [...prevPokemon, ...data.results]);
+        setPokemon(() => [...data.results]);
       })
       .catch((err) => console.log(err));
   };
 
-  const handleShowMore = () => {
+  const handleShowNext = () => {
     const newOffset = offset + 10;
     if (newOffset < totalCount) {
+      setOffset(newOffset);
+    }
+  };
+
+  const handleShowPrevious = () => {
+    const newOffset = offset - 10;
+    if (newOffset >= 0) {
       setOffset(newOffset);
     }
   };
@@ -36,12 +43,11 @@ function PokemonList() {
           <div key={index} className="pokemon-circle">
             <img
               src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
-                index + 1
+                index + offset + 1
               }.png`}
               alt={poke.name}
             />
             <span>
-              #{index + 1}{" "}
               {poke.name.charAt(0).toUpperCase() + poke.name.slice(1)}
             </span>
             <Link to={`/PokemonInfo/${poke.name}`}>More Info</Link>
@@ -49,9 +55,14 @@ function PokemonList() {
         ))}
       </div>
       <div className="text-center">
+        {offset > 11 && (
+          <button onClick={handleShowPrevious} className="btn btn-primary">
+            Show Previous Page
+          </button>
+        )}
         {offset + 10 < totalCount && (
-          <button onClick={handleShowMore} className="btn btn-primary">
-            Show More
+          <button onClick={handleShowNext} className="btn btn-primary">
+            Show Next Page
           </button>
         )}
       </div>
