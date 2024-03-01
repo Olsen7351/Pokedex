@@ -41,12 +41,12 @@ function PokemonList() {
           <div key={index} className="pokemon-circle">
             <img
               src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
-                index + offset + 1
+                index + 1
               }.png`}
               alt={poke.name}
             />
             <span>
-              #{index + offset + 1}{" "}
+              #{index + 1}{" "}
               {poke.name.charAt(0).toUpperCase() + poke.name.slice(1)}
             </span>
             <Link to={`/PokemonInfo/${poke.name}`}>More Info</Link>
