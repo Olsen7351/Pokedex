@@ -1,30 +1,38 @@
 import React from "react";
 import { useState } from "react";
-
-// TODO: Create a SearchBar component that takes a prop and then uses that prop to search for a List of Pokemons containing the search term
-// The SearchBar component should have a form with an input and a button
+import { useNavigate } from "react-router-dom";
 
 function SearchBar(props) {
   const [searchTerm, setSearchTerm] = useState("");
+  const navigate = useNavigate();
 
-  const handleSearch = (e) => {
-    e.preventDefault();
-    props.handleSearch(searchTerm);
-  };
+  function handleSearch() {
+    if (searchTerm) {
+      // Navigate to the search result page
+
+      navigate(`/SearchResult/${searchTerm}`);
+    } else {
+      // Show an error message
+      alert("Please enter a search term");
+    }
+  }
 
   return (
     <div>
-      <form onSubmit={handleSearch}>
-        <input
-          type="text"
-          placeholder="Search for a Pokemon"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
-        <button type="submit">Search</button>
-      </form>
+      <input
+        type="text"
+        placeholder="Search"
+        value={searchTerm}
+        onChange={
+          (e) => {
+            setSearchTerm(e.target.value.toLowerCase())
+          } // 
+        }
+      />
+      <button onClick={handleSearch} className="btn btn-primary m-2">Search</button>
     </div>
   );
 }
 
 export default SearchBar;
+

@@ -34,7 +34,7 @@ function PokemonList() {
 
   useEffect(() => {
     fetchPokemon();
-  }, [offset]); // Trigger fetchPokemon whenever offset changes
+  }, [offset]);
 
   return (
     <div>
@@ -42,9 +42,8 @@ function PokemonList() {
         {pokemon.map((poke, index) => (
           <div key={index} className="pokemon-circle">
             <img
-              src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
-                index + offset + 1
-              }.png`}
+              src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${index + offset + 1
+                }.png`}
               alt={poke.name}
             />
             <span>
