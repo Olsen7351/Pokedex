@@ -54,7 +54,7 @@ function PokemonList() {
         ))}
       </div>
       <div className="text-center">
-        {offset > 11 && (
+        {offset > 9 && (
           <button onClick={handleShowPrevious} className="btn btn-primary">
             Show Previous Page
           </button>
